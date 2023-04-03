@@ -1,0 +1,13 @@
+{% extends 'mygis/base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block content %}
+      <div class="starter-template">
+          <h2>{{ article.title }}</h2>
+          <p class="lead">{{ article.text |safe }}</p>
+      </div>
+{% endblock %}

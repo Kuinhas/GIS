@@ -1,5 +1,4 @@
 """GIST URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -19,4 +18,15 @@ from mygis import views
 
 urlpatterns = [
     re_path('^$', views.home, name='home'),
+    re_path(r'^about/', views.about, name='about'),
+    re_path(r'^articles/(?P<article_id>[0-9]+)/$', views.show_articles, name='article'),
 ]
+
+# from django.contrib import admin
+# from django.conf.urls import url
+
+'''
+urlpatterns = [
+    url(r'^$', views.home, name='home'),
+]
+'''
