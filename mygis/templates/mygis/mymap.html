@@ -1,0 +1,72 @@
+{% extends 'mygis/base.html' %}
+
+{% block title %}
+   Map
+{% endblock %}
+
+{% block headgis %}
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+     <style>
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 600px;
+        width: 100%;
+      }
+
+    </style>
+        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.26/"></script>
+
+    <script>
+      require(["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Fullscreen", "esri/widgets/ScaleBar", "esri/widgets/AreaMeasurement2D"], function(esriConfig, Map, MapView, Locate, Fullscreen, ScaleBar, AreaMeasurement2D) {
+
+        esriConfig.apiKey = "YOUR_API_KEY";
+
+        const map = new Map({
+          basemap: "arcgis-oceans" // Basemap layer service
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [30.527561, 50.452194], // Longitude, latitude
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+        const locate = new Locate({
+          view: view,
+          useHeadingEnabled: false,
+          goToOverride: function(view, options) {
+            options.target.scale = 1500;
+            return view.goTo(options.target);
+          }
+        });
+        view.ui.add(locate, "top-left");
+
+        const fullscreen = new Fullscreen({
+          view: view
+        });
+        view.ui.add(fullscreen, "top-right");
+
+        let scaleBar = new ScaleBar({
+            view: view
+        });
+        view.ui.add(scaleBar, "bottom-left");
+
+        let measurementWidget = new AreaMeasurement2D({
+            view: view
+        });
+        view.ui.add(measurementWidget, "bottom-right");
+
+      });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+      <div class="starter-template">
+          <h2>ArcGIS Maps SDK for JavaScript</h2>
+      </div>
+      <div id="viewDiv"></div>
+{% endblock %}

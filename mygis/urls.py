@@ -19,6 +19,7 @@ from mygis import views
 urlpatterns = [
     re_path('^$', views.home, name='home'),
     re_path(r'^about/', views.about, name='about'),
+    re_path(r'^mymap/', views.mymap, name='mymap'),
     re_path(r'^articles/(?P<article_id>[0-9]+)/$', views.show_articles, name='article'),
 ]
 
